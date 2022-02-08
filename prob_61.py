@@ -6,7 +6,7 @@ def chk_num(x, num):
     chk = 0
     if x == 3:
         while chk < num:
-            chk = k*(k+1)/2
+            chk = k*(k+1)//2
             k += 1
             if chk == num:
                 return 3
@@ -20,7 +20,7 @@ def chk_num(x, num):
         return -4
     elif x == 5:
         while chk < num:
-            chk = k*(3*k-1)/2
+            chk = k*(3*k-1)//2
             k += 1
             if chk == num:
                 return 5
@@ -34,7 +34,7 @@ def chk_num(x, num):
         return -6
     elif x == 7:
         while chk < num:
-            chk = k*(5*k-3) / 2
+            chk = k*(5*k-3) // 2
             k += 1
             if chk == num:
                 return 7
@@ -59,7 +59,7 @@ def chk_true(num):
         
         
 #f_lst = [''.join(p) for p in itt.combinations_with_replacement('0123456789', 4)]
-t_lst = [''.join(p) for p in itt.combinations_with_replacement('0123456789', 2)]
+t_lst = [''.join(p) for p in itt.product('0123456789', repeat = 2)]
 
 num = 0
 hoobo_lst = []
@@ -73,6 +73,11 @@ for i in t_lst:
                 for k in t_lst:
                     num = int(j+k)
                     if len(chk_true(num)) != 0 and int(k) > 9:
+                        # print(num)
+                        # num = int(k+i)
+                        # if len(chk_true(num)) != 0:
+                        #     print(num)
+                        #여기가 예제일 때 확인점
                         for l in t_lst:
                             num = int(k+l)
                             if len(chk_true(num)) != 0 and int(l) > 9:
@@ -86,7 +91,7 @@ for i in t_lst:
                                                 if len(chk_true(num)) != 0:
                                                     hoobo_lst.append(i+j+k+l+m+n)
 
-            
+real_hoobo = []
 for i in hoobo_lst:
     chk_set = set()
     chk_set.update(chk_true(int(i[0:4])))
@@ -95,8 +100,10 @@ for i in hoobo_lst:
     chk_set.update(chk_true(int(i[6:10])))
     chk_set.update(chk_true(int(i[8:12])))
     chk_set.update(chk_true(int(i[10:12] + i[0:2])))
-    print(chk_set)
+    #print(chk_set)
     
     if len(chk_set) == 6:
-        print (i)
+        real_hoobo.append(i)
         
+        
+chk_true(21)
