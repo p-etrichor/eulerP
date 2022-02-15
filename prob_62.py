@@ -44,11 +44,11 @@ chk_digit = dict()
 for i in cube_set:
     chk = chk_num(i)
     if chk in chk_digit:
-        chk_digit[chk] += 1
+        chk_digit[chk].append(i)
     else:
-        chk_digit[chk] = 1
+        chk_digit[chk] = list[i]
     
 for i in chk_digit:
-    if chk_digit[i] == 5:
-        print(i)
+    if len(chk_digit[i]) == 5:
+        print(chk_digit[i])
     
