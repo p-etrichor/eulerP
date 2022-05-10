@@ -1,35 +1,54 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Apr 25 15:06:16 2022
 
-@author: yuhs19
-"""
 
-def rtn_(a):
-    lst = []
-    #a = 6
+def get_little_div(a):
     for i in range(2, int(a**0.5)+1):
         if a % i == 0:
-            lst.append(i)
-            lst.append(a // i)
-    
-    last_lst = []
-    for i in range(1, a+1):
-        chk = 0
-        for j in lst:
-            if chk == 0 and i >= j and i % j == 0:
-                chk = 1
-        
-        if chk == 0:
-            last_lst.append(i)
+            return i
+    return 1
 
-    return len(last_lst)
+
+def get_divs(a):
+    #a = 17
+    lst = []
+    chk = 0
+    while chk == 0:
+        rtn = get_little_div(a)
+        if rtn == 1:
+            chk = 1
+            lst.append(a)
+        else:
+            a = a // rtn
+            lst.append(rtn)
+    
+    return set(lst)
+
+def find_totient(a):
+    #a = 6
+    lst = [i for i in range(1, a)]
+    lst_divs = get_divs(a)
+    for i in range(0, len(lst)):
+        for j in lst_divs:
+            if lst[i] % j == 0:
+                lst[i] = 0
+    
+    settt = set(lst)
+    if 0 in settt:
+        return len(settt) - 1
+    else:
+        return len(settt)
+                
+    
+    
+#find_totient(999999)
+
+
+#get_divs(987654321)
 
 
 num = 1
 ans = 1
-for i in range(990000, 1000001):
-    rtn = rtn_(i)
+for i in range(899999, 999999):
+    rtn = find_totient(i)
     if i / rtn > ans / num:
         ans = i
         num = rtn
