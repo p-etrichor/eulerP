@@ -1,11 +1,4 @@
 
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Mar 21 14:42:38 2022
-
-@author: yuhs19
-"""
-
 lst = []
 f = open("C:/Users/yuhs19/Downloads/p067_triangle.txt", 'r')
 
@@ -20,13 +13,18 @@ for i in f:
 f.close()
         
 
-for i in range(len(lst)):
-    for j in range(len(lst[len(lst)-i-1])-1):
-        #print(j)
-        if lst[len(lst)-i-1][j] > lst[len(lst)-i-1][j+1]:
-            lst[len(lst)-i-2][j] += lst[len(lst)-i-1][j]
+def rtn_path(i, j):
+    #i = 98
+    #j = 1
+    if i < 99:
+        forw = rtn_path(i+1, j)
+        back = rtn_path(i+1, j+1)
+        if forw > back:
+            return lst[i][j] + forw
         else:
-            lst[len(lst)-i-2][j] += lst[len(lst)-i-1][j+1]
-            
-            
-print(lst[0][0])
+            return lst[i][j] + back
+    else:
+        return lst[i][j]
+    
+    
+rtn_path(1, 1)
