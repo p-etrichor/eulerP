@@ -1,0 +1,13 @@
+
+
+
+num = int(input())
+
+cars = list(map(int, input().split()))
+
+chk = 0
+for i in cars:
+    if i % 10 == num:
+        chk = chk + 1
+
+print(chk)
